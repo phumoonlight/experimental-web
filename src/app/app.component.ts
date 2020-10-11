@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { forkJoin } from 'rxjs'
 import { AppService } from './app.service'
 
 @Component({
@@ -7,16 +8,49 @@ import { AppService } from './app.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'experimental-web';
-  resultString: string = ''
-  
+  isApiOk: boolean = false
+  isLoading: boolean = true
+  isDataFetchingFailed: boolean | undefined = undefined
+  tagList: any[] = []
   constructor(
     private appService: AppService
   ) { }
 
   ngOnInit() {
-    this.appService.checkApiHealth().subscribe((obs) => {
-      this.resultString = JSON.stringify(obs)
-    })
+    this.checkApiStatus()
+  }
+
+  checkApiStatus() {
+    this.appService.checkApiHealth().subscribe(
+      () => {
+        this.isApiOk = true
+        this.fetchNeededData()
+      },
+      (error) => {
+        console.error(error)
+        this.isApiOk = false
+        this.isLoading = false
+      },
+    )
+  }
+
+  fetchNeededData() {
+    forkJoin({
+      fetchAllTag: this.appService.fetchAllTag(),
+    }).subscribe(
+      (response) => {
+        const fetchAllTagResponse = response.fetchAllTag
+        this.tagList = fetchAllTagResponse.document
+      },
+      (error) => {
+        console.error(error)
+        this.isDataFetchingFailed = true
+        this.isLoading = false
+      },
+      () => {
+        this.isDataFetchingFailed = false
+        this.isLoading = false
+      }
+    )
   }
 }

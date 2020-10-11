@@ -1,20 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
+import { CommonModule } from '@angular/common'
 import { AppRoutingModule } from './app.routing'
 import { AppComponent } from './app.component'
 import { AppService } from './app.service'
+import { CommonPipeModule } from './common-pipe/common-pipe.module'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     CommonModule,
+    AppRoutingModule,
+    CommonPipeModule,
   ],
   providers: [
     AppService,
