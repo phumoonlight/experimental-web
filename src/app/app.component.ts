@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { forkJoin } from 'rxjs'
 import { AppService } from './app.service'
 
@@ -8,12 +9,23 @@ import { AppService } from './app.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isApiOk: boolean = false
   isLoading: boolean = true
-  isDataFetchingFailed: boolean | undefined = undefined
-  tagList: any[] = []
+  isApiOk: boolean
+  isDataFetchingFailed: boolean
+  tagList: any[]
+  tagCollectionList: any[]
+  isFormTagRefIdInvalid: boolean
+  createTagForm: FormGroup = new FormGroup({
+    tagName: new FormControl('' ),
+    tagRefId: new FormControl('', [
+      Validators.required,
+    ]),
+    tagDescription: new FormControl(''),
+  })
+
   constructor(
-    private appService: AppService
+    private formBuilder: FormBuilder,
+    private appService: AppService,
   ) { }
 
   ngOnInit() {
@@ -37,9 +49,12 @@ export class AppComponent implements OnInit {
   fetchNeededData() {
     forkJoin({
       fetchAllTag: this.appService.fetchAllTag(),
+      fetchAllTagCollection: this.appService.fetchAllTagCollection(),
     }).subscribe(
       (response) => {
         const fetchAllTagResponse = response.fetchAllTag
+        const fetchAllTagCollectionResponse = response.fetchAllTagCollection
+        this.tagCollectionList = fetchAllTagCollectionResponse.document
         this.tagList = fetchAllTagResponse.document
       },
       (error) => {
@@ -50,6 +65,35 @@ export class AppComponent implements OnInit {
       () => {
         this.isDataFetchingFailed = false
         this.isLoading = false
+      }
+    )
+  }
+
+  onSubmitCreateTag() {
+    if (this.createTagForm.invalid) {
+      this.isFormTagRefIdInvalid = true
+      return
+    }
+    const formValue = this.createTagForm.value
+    const payloadFieldTagName = formValue.tagName && {
+      tag_name: formValue.tagName
+    }
+    const payloadFieldTagDescription = formValue.tagDescription && {
+      tag_description: formValue.tagDescription
+    }
+    this.appService.createTag({
+      tag_ref_id: formValue.tagRefId,
+      ...payloadFieldTagName,
+      ...payloadFieldTagDescription,
+    }).subscribe(
+      (response) => {
+        this.tagList.push(response.created_document)
+      },
+      (error) => {
+        console.error(error)
+      },
+      () => {
+        this.createTagForm.reset()
       }
     )
   }

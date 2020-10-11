@@ -1,7 +1,17 @@
 .tag-item {
   background:#e0e0e0;
   margin: 10px;
-  padding: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.tag-block {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid #c4c4c4 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
 }
 
 .dot-divider {
@@ -13,4 +23,12 @@
   margin-right: 5px;
   width: 5px;
   height: 5px;
+}
+
+.ng-invalid {
+  color: red;
+}
+
+.pre {
+  white-space: pre-wrap;
 }

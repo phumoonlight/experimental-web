@@ -9,13 +9,19 @@ interface CreateTagPayload {
 }
 
 interface GetAllTagResponse {
-  status_code: number,
-  document: any[],
+  status_code: number
+  document: any[]
+}
+
+interface CreateTagResponse {
+  status_code: number
+  created_document: any
 }
 
 @Injectable()
 export class AppService {
   routeTag = `${environment.apiBaseUrl}/tags`
+  routeTagCollection = `${environment.apiBaseUrl}/tagcollections`
   constructor(
     private http: HttpClient
   ) { }
@@ -28,7 +34,12 @@ export class AppService {
     return this.http.get<GetAllTagResponse>(this.routeTag)
   }
 
+  fetchAllTagCollection() {
+    return this.http.get<GetAllTagResponse>(this.routeTagCollection)
+  }
+
   createTag(payload: CreateTagPayload) {
-    return this.http.post(this.routeTag, payload)
+    console.log(payload)
+    return this.http.post<CreateTagResponse>(this.routeTag, payload)
   }
 }
