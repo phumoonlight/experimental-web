@@ -42,4 +42,8 @@ export class AppService {
     console.log(payload)
     return this.http.post<CreateTagResponse>(this.routeTag, payload)
   }
+
+  deleteTag(refId: string) {
+    return this.http.delete(`${this.routeTag}/${refId}`)
+  }
 }

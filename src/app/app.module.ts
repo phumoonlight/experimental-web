@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common'
 import { AppRoutingModule } from './app.routing'
 import { AppComponent } from './app.component'
 import { AppService } from './app.service'
-import { CommonPipeModule } from './common-pipe/common-pipe.module'
+import { CommonServiceModule } from './common-service/common-service.module'
+import { PagesModule } from './pages/pages.module'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CommonPipeModule } from './common-pipe/common-pipe.module'
     ReactiveFormsModule,
     CommonModule,
     AppRoutingModule,
-    CommonPipeModule,
+    CommonServiceModule,
+    PagesModule,
   ],
   providers: [
     AppService,

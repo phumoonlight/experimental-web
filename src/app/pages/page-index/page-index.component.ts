@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { forkJoin } from 'rxjs'
-import { AppService } from './app.service'
+import { AppService } from '../../app.service'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-page-index',
+  templateUrl: './page-index.component.html',
+  styleUrls: ['./page-index.component.css']
 })
-export class AppComponent implements OnInit {
+export class PageIndexComponent implements OnInit {
   isLoading: boolean = true
   isApiOk: boolean
   isDataFetchingFailed: boolean

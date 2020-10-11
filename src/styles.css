@@ -1,8 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: product-sans;
+  src: url('./assets/product-sans-regular.ttf');
+}
+
 body {
   margin: 0;
 }
 
 * {
   box-sizing: border-box;
+  font-family: product-sans;
 }

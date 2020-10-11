@@ -1,0 +1,19 @@
+<h1>Experimental API Backoffice</h1>
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="!isLoading">
+  <div>
+    <span>api status : </span>
+    <span>{{ isApiOk | apiStatus }}</span>
+  </div>
+  <app-tag-form (submit)="onSubmitCreateTag($event)"></app-tag-form>
+  <app-tag-list [tagList]="tagList" (delete)="onClickDelete($event)"></app-tag-list>
+  
+  <div class="tag-block">
+    <div *ngIf="!tagCollectionList.length">tag collection is empty...</div>
+    <div class="tag-item" *ngFor="let item of tagCollectionList; let index = index">
+      <div>{{ index }}</div>
+      <div>{{ item.tag_ref_id }}</div>
+      <div>{{ item.data | json }}</div>
+    </div>
+  </div>
+</div>
