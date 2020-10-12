@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { PageIndexComponent } from './pages/page-index/page-index.component'
-import { PageEditTagComponent } from './pages/page-edit-tag/page-edit-tag.component'
+import { TagRoutingModule } from './tag/tag.routing'
+import { TagCollectionRoutingModule } from './tag-collection/tag-collection.routing'
 
 const routes: Routes = [
   {
     path: '',
-    component: PageIndexComponent,
+    loadChildren: TagRoutingModule.lazyLoadModule
   },
   {
-    path: '',
-    component: PageEditTagComponent,
+    path: 'tagcollections',
+    loadChildren: TagCollectionRoutingModule.lazyLoadModule
   },
 ]
 

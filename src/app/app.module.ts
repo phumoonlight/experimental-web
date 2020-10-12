@@ -8,6 +8,7 @@ import { AppComponent } from './app.component'
 import { AppService } from './app.service'
 import { CommonServiceModule } from './common-service/common-service.module'
 import { PagesModule } from './pages/pages.module'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PagesModule } from './pages/pages.module'
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    SharedModule,
     AppRoutingModule,
     CommonServiceModule,
     PagesModule,

@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<nav>
+  <a class="link-home" routerLink="/">Experimental API Backoffice</a>
+  <div class="api-status">
+    <span>api status : </span>
+    <span class="api-status-status">{{ isApiOk | apiStatus }}</span>
+  </div>
+</nav>
+<div class="page-layout">
+  <aside>
+    <div class="title">Navigation</div>
+    <a routerLink="/">Tag</a>
+    <a routerLink="/tagcollections">Tag Collections</a>
+  </aside>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+
+
