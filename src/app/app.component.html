@@ -1,5 +1,5 @@
 <nav>
-  <a class="link-home" routerLink="/">Experimental API Backoffice</a>
+  <a class="link-home" routerLink="/">experimental api backoffice</a>
   <div class="api-status">
     <span>api status : </span>
     <span class="api-status-status">{{ isApiOk | apiStatus }}</span>
@@ -7,9 +7,15 @@
 </nav>
 <div class="page-layout">
   <aside>
-    <div class="title">Navigation</div>
+    <div class="title">NAVIGATION</div>
+    <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+      Tag
+    </a>
+    <a routerLink="/tagcollections" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+      Tag Collections
+    </a>
+    <div class="title">TAG LOOKUP</div>
     <a routerLink="/">Tag</a>
-    <a routerLink="/tagcollections">Tag Collections</a>
   </aside>
   <main>
     <router-outlet></router-outlet>

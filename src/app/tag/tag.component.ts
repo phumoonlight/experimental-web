@@ -74,6 +74,7 @@ export class TagComponent implements OnInit {
   }
 
   onSubmitCreateTag(createTagForm: FormGroup) {
+    console.log('call tag')
     if (createTagForm.invalid) {
       this.isFormTagRefIdInvalid = true
       return

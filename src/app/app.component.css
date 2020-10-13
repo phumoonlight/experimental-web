@@ -25,11 +25,14 @@ a {
 }
 
 a:hover {
-  opacity: .75;
+  opacity: .85;
 }
 
 a.link-home {
   color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
 }
 
 main {
@@ -42,15 +45,17 @@ main {
 
 .page-layout {
   display: flex;
-  padding: 10px;
   align-items: flex-start;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 
 aside {
   background: #ececec;
-  padding: 10px;
   margin-right: 10px;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   min-width: 200px;
 }
 
@@ -61,10 +66,13 @@ aside .title {
 
 aside a {
   display: flex;
-  border-radius: 10px;
 }
 
 aside a:hover {
-  background: #c5c5c5;
+  background: #d3d3d3;
+}
+
+.active-link {
+  background: #d3d3d3;
 }
 
