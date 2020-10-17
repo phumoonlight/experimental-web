@@ -15,7 +15,7 @@ const routes: Routes = [
 })
 export class TagRoutingModule {
   static async lazyLoadModule() {
-    const module = await import('./tag.module')
-    return module.TagModule
+    const { TagModule } = await import('./tag.module')
+    return TagModule
   }
 }

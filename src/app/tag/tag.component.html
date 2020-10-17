@@ -1,8 +1,9 @@
 <router-outlet></router-outlet>
 
 <div>
-  <app-tag-form (submit)="onSubmitCreateTag($event)"></app-tag-form>
+  <app-tag-form (formSubmit)="onSubmitCreateTag($event)"></app-tag-form>
   <app-tag-list [tagList]="tagList" (delete)="onClickDelete($event)">
     <div *ngIf="isLoading">Fetching data...</div>
   </app-tag-list>
 </div>
+

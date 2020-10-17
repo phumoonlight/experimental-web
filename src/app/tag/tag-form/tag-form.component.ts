@@ -4,10 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 @Component({
   selector: 'app-tag-form',
   templateUrl: './tag-form.component.html',
-  styleUrls: ['./tag-form.component.css']
+  styleUrls: ['./tag-form.component.scss']
 })
 export class TagFormComponent implements OnInit {
-  @Output() submit = new EventEmitter()
+  @Output() formSubmit = new EventEmitter()
   createTagForm: FormGroup = new FormGroup({
     tagRefId: new FormControl('', [
       Validators.required,
@@ -25,6 +25,6 @@ export class TagFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submit.emit(this.createTagForm)
+    this.formSubmit.emit(this.createTagForm)
   }
 }

@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 @Component({
   selector: 'app-tag-collection-form',
   templateUrl: './tag-collection-form.component.html',
-  styleUrls: ['./tag-collection-form.component.css']
+  styleUrls: ['./tag-collection-form.component.scss']
 })
 export class TagCollectionFormComponent implements OnInit {
   @Input() tagList: any[]

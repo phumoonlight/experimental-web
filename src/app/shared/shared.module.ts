@@ -4,6 +4,7 @@ import { ApiStatusPipe } from './pipes/api-status.pipe'
 import { ApiService } from './services/api.service'
 import { TagService } from './services/tag.service'
 import { TagCollectionService } from './services/tag-collection.service'
+import { UtilService } from './services/util.service'
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TagCollectionService } from './services/tag-collection.service'
     ApiStatusPipe,
   ],
   providers: [
+    UtilService,
     ApiService,
     TagService,
     TagCollectionService,

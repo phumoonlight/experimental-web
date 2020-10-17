@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
-import { forkJoin } from 'rxjs'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Observable, Subscription ,forkJoin } from 'rxjs'
 import { AppService } from '../app.service'
 import { ApiService } from '../shared/services/api.service'
 
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
-  styleUrls: ['./tag.component.css']
+  styleUrls: ['./tag.component.scss']
 })
-export class TagComponent implements OnInit {
+export class TagComponent implements OnInit, OnDestroy {
   isLoading: boolean = true
   isApiOk: boolean
   isDataFetchingFailed: boolean
@@ -27,13 +27,19 @@ export class TagComponent implements OnInit {
   constructor(
     private appService: AppService,
     private apiService: ApiService,
-  ) { }
+  ) {
+    
+  }
 
   ngOnInit() {
     this.checkApiStatus()
     this.apiService.checkStatus().then(online => {
       console.log(online)
     })
+  }
+
+  ngOnDestroy() {
+    
   }
 
   checkApiStatus() {
@@ -74,11 +80,7 @@ export class TagComponent implements OnInit {
   }
 
   onSubmitCreateTag(createTagForm: FormGroup) {
-    console.log('call tag')
-    if (createTagForm.invalid) {
-      this.isFormTagRefIdInvalid = true
-      return
-    }
+    console.log(createTagForm.value)
     const formValue = createTagForm.value
     const payloadFieldTagName = formValue.tagName && {
       tag_name: formValue.tagName
