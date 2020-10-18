@@ -1,15 +1,46 @@
 .container {
   display: flex;
-  flex-direction: column;
-  border: solid #c4c4c4 1px;
-  padding: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   margin: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
   min-height: 200px;
 }
 
 .item {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background:#e0e0e0;
-  margin: 10px;
+  border: solid #c4c4c4 1px;
+  margin: {
+    right: 10px;
+    bottom: 10px;
+  }
   padding: 10px;
+  .name {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: .75px;
+  }
+  .ref-id {
+    font-size: 15px;
+    color: #8899a6;
+  }
+  .desc {
+    font-size: 15px;
+    color: #7e7e7e;
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+  .btn-container {
+    margin-top: 25px;
+    display: flex;
+  }
+  .btn-container .btn-delete {
+    margin-left: 10px;
+  }
 }
-

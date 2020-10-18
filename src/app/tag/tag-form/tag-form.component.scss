@@ -1,31 +1,26 @@
 form {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  border: solid #cfcfcf 1px;
+  width: 310px;
   padding: 10px;
   margin: 10px;
+  border: solid #b9b9b9 1px;
 }
 
 input, textarea {
-  border: none;
-  background: #ececec;
   margin: 10px;
   padding: 10px;
 }
 
-input:focus,
-textarea:focus {
-  outline: none;
+textarea {
+  resize: vertical;
+  height: 200px;
+
 }
 
-input[type=submit] {
-  cursor: pointer;
+button {
   width: 150px;
-  background: #00a2ff;
-
+  padding: 10px;
+  margin: auto;
 }
-
-input[type=submit]:hover {
-  opacity: .75;
-}
-

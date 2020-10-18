@@ -1,13 +1,13 @@
 <div class="container">
   <ng-content></ng-content>
-  <div class="item" *ngFor="let item of tagList; let index = index">
-    <div>{{ index }}</div>
-    <div>
-      <span>{{ item.name }}</span>
-      <span>.</span>
-      <span>{{ item.ref_id }}</span>
+  <div class="item" *ngFor="let item of tagList">
+    <div class="name">{{ item.name }}</div>
+    <div class="ref-id">@{{ item.ref_id }}</div>
+    <div class="btn-container">
+      <button (click)="onClickDelete(item.ref_id)">edit</button>
+      <button class="btn-delete" (click)="onClickDelete(item.ref_id)">
+        <span>delete</span>
+      </button>
     </div>
-    <div class="pre">{{ item.description }}</div>
-    <button (click)="onClickDelete(item.ref_id)">delete</button>
   </div>
 </div>

@@ -24,6 +24,10 @@ export class TagFormComponent implements OnInit {
 
   }
 
+  onDescInput(event: any) {
+    console.log(event.target.innerHTML)
+  }
+
   onSubmit() {
     this.formSubmit.emit(this.createTagForm)
   }
