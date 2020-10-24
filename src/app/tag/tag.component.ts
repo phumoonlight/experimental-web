@@ -1,81 +1,35 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Observable, Subscription ,forkJoin } from 'rxjs'
-import { AppService } from '../app.service'
-import { ApiService } from '../shared/services/api.service'
+import { Component, OnInit } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+
+import { TagService } from '../shared/services/tag.service'
 
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss']
 })
-export class TagComponent implements OnInit, OnDestroy {
+export class TagComponent implements OnInit {
   isLoading: boolean = true
-  isApiOk: boolean
   isDataFetchingFailed: boolean
-  tagList: any[]
-  tagCollectionList: any[]
   isFormTagRefIdInvalid: boolean
-  createTagForm: FormGroup = new FormGroup({
-    tagName: new FormControl('' ),
-    tagRefId: new FormControl('', [
-      Validators.required,
-    ]),
-    tagDescription: new FormControl(''),
-  })
+  tagList: any[]
 
   constructor(
-    private appService: AppService,
-    private apiService: ApiService,
-  ) {
-    
-  }
+    private tagService: TagService,
+  ) { }
 
   ngOnInit() {
-    this.checkApiStatus()
-    this.apiService.checkStatus().then(online => {
-      console.log(online)
-    })
-  }
-
-  ngOnDestroy() {
-    
-  }
-
-  checkApiStatus() {
-    this.appService.checkApiHealth().subscribe(
-      () => {
-        this.isApiOk = true
-        this.fetchNeededData()
-      },
-      (error) => {
-        console.error(error)
-        this.isApiOk = false
-        this.isLoading = false
-      },
-    )
-  }
-
-  fetchNeededData() {
-    forkJoin({
-      fetchAllTag: this.appService.fetchAllTag(),
-      fetchAllTagCollection: this.appService.fetchAllTagCollection(),
-    }).subscribe(
+    this.tagService.fetchAll().subscribe(
       (response) => {
-        const fetchAllTagResponse = response.fetchAllTag
-        const fetchAllTagCollectionResponse = response.fetchAllTagCollection
-        this.tagCollectionList = fetchAllTagCollectionResponse.document
-        this.tagList = fetchAllTagResponse.document
+        this.tagList = response
+        this.isDataFetchingFailed = false
+        this.isLoading = false
       },
       (error) => {
         console.error(error)
         this.isDataFetchingFailed = true
         this.isLoading = false
       },
-      () => {
-        this.isDataFetchingFailed = false
-        this.isLoading = false
-      }
     )
   }
 
@@ -88,13 +42,13 @@ export class TagComponent implements OnInit, OnDestroy {
     const payloadFieldTagDescription = formValue.tagDescription && {
       tag_description: formValue.tagDescription
     }
-    this.appService.createTag({
+    this.tagService.create({
       tag_ref_id: formValue.tagRefId,
       ...payloadFieldTagName,
       ...payloadFieldTagDescription,
     }).subscribe(
       (response) => {
-        this.tagList.push(response.created_document)
+        this.tagList.push(response)
       },
       (error) => {
         console.error(error)
@@ -107,17 +61,14 @@ export class TagComponent implements OnInit, OnDestroy {
 
   onClickDelete(tagRefId: string) {
     const confirmDelete = confirm(`delete tag id : ${tagRefId}`)
-    if (!confirmDelete) {
-      return
-    }
-    this.appService.deleteTag(tagRefId).subscribe(
+    if (!confirmDelete) return
+    this.tagService.delete(tagRefId).subscribe(
       () => {
-        this.tagList = this.tagList.filter((tag) => (
-          tag.ref_id !== tagRefId
-        ))
+        this.tagList = this.tagList.filter((tag) => (tag.ref_id !== tagRefId))
         alert('delete success')
       },
-      () => {
+      (error) => {
+        console.error(error)
         alert('delete failed')
       }
     )

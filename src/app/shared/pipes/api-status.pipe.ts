@@ -4,7 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core'
   name: 'apiStatus'
 })
 export class ApiStatusPipe implements PipeTransform {
-  transform(value: boolean): string {
+  transform(value: boolean, isLoading?: boolean): string {
+    if (isLoading) return 'pending...'
     return value ? 'online' : 'offline'
   }
 }

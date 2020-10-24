@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common'
 
 import { AppRoutingModule } from './app.routing'
 import { AppComponent } from './app.component'
-import { AppService } from './app.service'
+import { AppGithubIconComponent } from './app-github-icon/app-github-icon.component'
 import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppGithubIconComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,9 +22,6 @@ import { SharedModule } from './shared/shared.module'
     CommonModule,
     SharedModule,
     AppRoutingModule,
-  ],
-  providers: [
-    AppService,
   ],
   bootstrap: [
     AppComponent,

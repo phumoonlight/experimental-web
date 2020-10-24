@@ -51,9 +51,42 @@ main {
 
 aside {
   position: fixed;
-  background: #ececec;
   width: 200px;
   top: 60px;
+  section {
+    background: #ececec;
+    margin-bottom: 10px;
+  }
+}
+
+aside #side-nav {
+  a:hover {
+    background: #d3d3d3;
+  }
+  .active-link {
+    background: #d3d3d3;
+  }
+}
+
+aside #api-status {
+  a.online {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #70ac10;
+  }
+  a.online:hover {
+    color: #90d60e;
+  }
+  a.offline {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ee0e0e;
+  }
+  a.offline:hover {
+    color: #ff0000;
+  }
 }
 
 aside .title {
@@ -65,11 +98,8 @@ aside a {
   display: flex;
 }
 
-aside a:hover {
-  background: #d3d3d3;
+.link-github {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
 }
-
-.active-link {
-  background: #d3d3d3;
-}
-

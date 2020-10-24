@@ -1,8 +1,9 @@
 .container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+  align-items: flex-end;
   margin: 10px;
   padding-left: 10px;
   padding-top: 10px;
@@ -25,6 +26,7 @@
     font-size: 20px;
     font-weight: bold;
     letter-spacing: .75px;
+    word-break: break-all;
   }
   .ref-id {
     font-size: 15px;

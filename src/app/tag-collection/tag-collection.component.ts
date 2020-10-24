@@ -10,6 +10,7 @@ import { TagCollectionService } from '../shared/services/tag-collection.service'
   styleUrls: ['./tag-collection.component.scss']
 })
 export class TagCollectionComponent implements OnInit {
+  isLoading: boolean = true
   tagCollectionList: any[] = []
   tagList: any[] = []
   count$: Observable<number>;
@@ -20,11 +21,12 @@ export class TagCollectionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tagCollectionService.fetchAllTagCollection().subscribe((response) => {
-      this.tagCollectionList = response.document
+    this.tagCollectionService.fetchAll().subscribe((response) => {
+      this.tagCollectionList = response
+      this.isLoading = false
     })
-    this.tagService.fetchAllTag().subscribe((response) => {
-      this.tagList = response.document
+    this.tagService.fetchAll().subscribe((response) => {
+      this.tagList = response
     })
   }
 
@@ -36,7 +38,7 @@ export class TagCollectionComponent implements OnInit {
       tag_ref_id: tagRefId,
       data: JSON.parse(tagJsonData),
     }).subscribe((response) => {
-      this.tagCollectionList.push(response.created_document)
+      this.tagCollectionList.push(response)
     })
   }
 }

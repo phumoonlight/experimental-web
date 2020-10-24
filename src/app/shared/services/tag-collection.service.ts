@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { environment } from '../../../environments/environment'
+import { Observable } from 'rxjs'
 
-interface GetResponseBody {
-  status_code: number
-  document: any[]
-}
+import { environment } from '../../../environments/environment'
 
 interface CreateResponseBody {
   status_code: number
@@ -19,17 +16,25 @@ interface CreateTagCollectionPayload {
 
 @Injectable()
 export class TagCollectionService {
-  private routeTagCollection = `${environment.apiBaseUrl}/tagcollections`
+  private endpoint = `${environment.apiBaseUrl}/tagcollections`
   
   constructor(
     private http: HttpClient
   ) { }
 
-  fetchAllTagCollection() {
-    return this.http.get<GetResponseBody>(this.routeTagCollection)
+  fetchAll(): Observable<any> {
+    return this.http.get<any[]>(this.endpoint)
   }
 
-  createTagCollecion(payload: CreateTagCollectionPayload) {
-    return this.http.post<CreateResponseBody>(this.routeTagCollection, payload)
+  fetchByTagId(tagRefId: string): Observable<any> {
+    return this.http.get<any[]>(`${this.endpoint}?tagrefid=${tagRefId}`)
+  }
+
+  fetchById(collectionMongoId: string): Observable<any> {
+    return this.http.get<any>(`${this.endpoint}/${collectionMongoId}`)
+  }
+
+  createTagCollecion(payload: CreateTagCollectionPayload): Observable<CreateResponseBody> {
+    return this.http.post<CreateResponseBody>(this.endpoint, payload)
   }
 }
